@@ -126,13 +126,14 @@ def test_contains_todo_return_true():
 Given a string that does NOT contain the string `#TODO`
 It returns False
 """
-includes_string("hello WORLD") => True
+includes_string("hello WORLD") => False
+
 
 """
 Given an empty string
 It returns False
 """
-includes_string("hello WORLD") => True
+includes_string("hello WORLD") => False
 ```
 
 Ensure all test function names are unique, otherwise pytest will ignore them!
