@@ -4,24 +4,26 @@ Copy this into a `recipe.md` in your project and fill it out.
 
 ## 1. Describe the Problem
 
-_Put or write the user story here. Add any clarifying notes you might have._
+As a user
+So that I can keep track of my tasks
+I want to check if a text includes the string `#TODO`.
+
 
 ## 2. Design the Function Signature
 
-_Include the name of the function, its parameters, return value, and side effects._
+def includes_string(str)
 
 ```python
 # EXAMPLE
 
-def extract_uppercase(mixed_words):
-    """Extracts uppercase words from a string
+def includes_string(str):
+    """Check if a text includes the string `#TODO`
 
     Parameters: (list all parameters and their types)
-        mixed_words: a string containing words (e.g. "hello WORLD")
+        str: a string to check if it includes the string `#TODO`
 
     Returns: (state the return value and its type)
-        a list of strings, each one a word (e.g. ["WORLD"])
-
+        a boolean, True if str includes the string `#TODO`, otherwise False
     Side effects: (state any side effects)
         This function doesn't print anything or have any other side-effects
     """
@@ -36,46 +38,45 @@ _Make a list of examples of what the function will take and return._
 # EXAMPLE
 
 """
-Given a lower and an uppercase word
-It returns a list with the uppercase word
+Given a string that starts with the string `#TODO`
+It returns True
 """
-extract_uppercase("hello WORLD") => ["WORLD"]
+includes_string("#TODOhello WORLD") => True
+
 
 """
-Given two uppercase words
-It returns a list with both words
+Given a string that ends with the string `#TODO`
+It returns True
 """
-extract_uppercase("HELLO WORLD") => ["HELLO", "WORLD"]
+includes_string("hello WORLD#TODO") => True
+
 
 """
-Given two lowercase words
-It returns an empty list
+Given a string that econtains the string `#TODO`
+It returns True
 """
-extract_uppercase("hello world") => []
+includes_string("hello #TODO WORLD") => True
+
 
 """
-Given a lower and a mixed case word
-It returns an empty list
+Given a string that contains the string `#TODO`
+It returns True
 """
-extract_uppercase("hello WoRLD") => []
+includes_string("hello #TODO WORLD") => True
+
 
 """
-Given a lowercase word and an uppercase word with an exclamation mark
-It returns a list with the uppercase word, no exclamation mark
+Given a string that does NOT contain the string `#TODO`
+It returns False
 """
-extract_uppercase("hello WORLD!") => ["WORLD"]
+includes_string("hello WORLD") => True
 
 """
 Given an empty string
-It returns an empty list
+It returns False
 """
-extract_uppercase("") => []
+includes_string("hello WORLD") => True
 
-"""
-Given a None value
-It throws an error
-"""
-extract_uppercase(None) throws an error
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
@@ -89,15 +90,49 @@ Here's an example for you to start with:
 ```python
 # EXAMPLE
 
-from lib.extract_uppercase import *
+from lib.includes_string import *
 
 """
-Given a lower and an uppercase word
-It returns a list with the uppercase word
+Given a string that starts with the string `#TODO`
+It returns True
 """
-def test_extract_uppercase_with_upper_then_lower():
-    result = extract_uppercase("hello WORLD")
-    assert result == ["WORLD"]
+def test_starts_with_todo_return_true():
+    expected = True
+    actual = includes_string("#TODOhello WORLD")
+    assert expected == actual
+
+
+"""
+Given a string that ends with the string `#TODO`
+It returns True
+"""
+def test_ends_with_todo_return_true():
+    expected = True
+    actual = includes_string("hello WORLD#TODO")
+    assert expected == actual
+
+
+"""
+Given a string that contains the string `#TODO` in the middle
+It returns True
+"""
+def test_contains_todo_return_true():
+    expected = True
+    actual = includes_string("hello WORLD#TODO")
+    assert expected == actual
+
+
+"""
+Given a string that does NOT contain the string `#TODO`
+It returns False
+"""
+includes_string("hello WORLD") => True
+
+"""
+Given an empty string
+It returns False
+"""
+includes_string("hello WORLD") => True
 ```
 
 Ensure all test function names are unique, otherwise pytest will ignore them!
